@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWITCH</title>
+  <link rel="stylesheet" href="switch.css">
+</head>
+
+<body>
+<div class="container">
+  <div class="title">
+    <h1>Entrance Detection</h1>
+  </div>
+  <img id="img" style="height:200px; margin-left:350px; margin-top:100px" src="svg/unlock.svg">
+
+  <input type="checkbox" onClick="toggleImg(); door();" id="toggle" hidden> 
+  <label for="toggle" class="toggleSwitch">
+    <span class="toggleButton"></span>
+    <img class="click" src="svg/click.svg">
+    <span class="text">click here!</span>
+  </label>
+
+  <img style="height:320px; position: absolute; transform: translate(280%, -10%);" src="svg/house.svg">
+  <img id="img1" style="height:200px; width: 130px; position: absolute; transform: translate(760%, 55%);" src="svg/opened-door.svg">
+</div>
+</body>
+
+<script>
+  const ws = new WebSocket("ws://localhost:3001")
+  var count = 'on';
+
+  let flag = true;
+  function toggleImg() {
+  if (count === 'on'){
+    ws.send("1"); // 서버에 데이터 전송
+    count = 'off'
+  }else {
+    ws.send("2")
+    count='on'
+  }
+  document.getElementById("img").src = flag
+  ? "svg/lock.svg"
+  : "svg/unlock.svg";
+
+  flag = !flag;
+  }
+
+  let flag1 = true;
+  function door() {
+  document.getElementById("img1").src = flag1
+  ? "svg/closed-door.svg"
+  : "svg/opened-door.svg";
+
+  flag1 = !flag1;
+  }
+</script>
+
+
+<nav role='navigation'>
+  <div id="menuToggle">
+    
+    <input type="checkbox" />
+    
+    <span></span>
+    <span></span>
+    <span></span>
+  
+    <ul id="menu">
+      <a href="/switch"><li>Home</li></a>
+      <a href="/"><li>firstpage</li></a>
+      <a href="#"><li>About</li></a>
+      <a href="#"><li>Info</li></a>
+      <a href="/noinvasion"><li>NoInvasion</li></a>
+      <a href="#"><li>Show me more</li></a>
+    </ul>
+  </div>
+</nav>
+
+
+</html>

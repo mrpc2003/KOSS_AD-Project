@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Websocket Chatting</title>
+    <script>
+      const ws = new WebSocket("ws://localhost:3001")
+    
+      function sayHi() {
+        ws.send("Hello") // 서버에 데이터 전송
+      }
+
+      ws.onmessage = function (event) {
+        console.log(`서버 웹소켓에게 받은 데이터: ${event.data}`);
+        document.getElementById('name').innerHTML=event.data
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1>Hello Express</h1>
+    <button onClick="sayHi()">Say Hi</button>
+    <p id="name"></p>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+* {
+margin: 0;
+padding: 0;
+}
+
+#page1,
+#page2 {
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+width: 100%;
+flex-direction: column;
+position: absolute;
+}
+
+a {
+font-size: xx-large;
+color: white;
+text-decoration: none;
+margin-top: 50px;
+border: 2px solid white;
+padding: 10px 30px;
+}
+
+#page1 {
+background-color: ForestGreen;
+}
+
+#page2 {
+background-color: rgb(67, 121, 67);
+}
+
+.slide-in {
+animation: change 5.5s ease forwards;
+}
+
+@keyframes change {
+from {
+    transform: translateX(100%);
+    visibility: visible;
+}
+
+to {
+    transform: translateX(0%);
+}
+}
+
+h1{
+font-size: 70px;
+font-family: 'Arima Madurai', cursive;}
+
+
+
+.thief {
+    animation: ani 3s linear forwards;
+    animation-delay: 3s;
+    position: relative;
+    top: 150px;
+    visibility: hidden;
+    height: 150px;
+}
+
+@keyframes ani {
+    0% {
+    transform: translateX(1000px);
+    visibility: hidden;
+    opacity: 0;
+    }
+    99% {
+    transform: translateX(0%);
+    visibility: visible;
+    opacity: 1;
+    }
+
+    100% {
+    transform: translateX(0%);
+    visibility: hidden;
+    }
+}
+
+
+.car {
+    animation: anim 1s linear forwards;
+    animation-delay: 5s;
+    position: relative;
+    top: 150px;
+    right: 200px;
+
+    height: 200px;
+    visibility: hidden;
+}
+
+@keyframes anim {
+    from {
+    transform: translateX(800px);
+    visibility: hidden;
+    }
+    to {
+    transform: translateX(100%);
+    visibility: visible;
+    }
+}
+
+
+.shocked {
+    animation: anima 2s linear forwards;
+    animation-delay: 6s;
+    position: relative;
+    top: 150px;
+    visibility: hidden;
+
+    width: 120px;
+    right: 1400px;
+    
+}
+
+@keyframes anima {
+    from {
+    transform: translateX(1000px);
+    visibility: hidden;
+    
+    }
+    to {
+    transform: translateX(0%);
+    visibility: visible;
+    }
+}

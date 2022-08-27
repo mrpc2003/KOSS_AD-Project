@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invasion</title>
+  <link rel="stylesheet" href="invasion.css">
+
+  <script type="text/javascript">
+    var imgArray = new Array();
+    imgArray[0] = "svg/siren.svg";
+    imgArray[1] = "svg/siren1.svg";
+
+    function showImage() {
+        var imgNum = Math.round(Math.random() * 1);
+        var objImg = document.getElementById("introImg");
+        objImg.src = imgArray[imgNum];
+
+        setTimeout("showImage()", 200);
+    }
+
+   </script>
+</head>
+
+<body onload="showImage()">
+    <div class="container">
+        <h1>Entrance Detection</h1>
+
+        <img style="height:100px; margin-left:200px; margin-top:-300px" src="svg/cloudy.svg">
+        <img style="height:300px; margin-left:-100px; margin-top:200px" src="svg/door.svg">
+        <img style="height:200px; margin-left: -40ch; margin-top:200px; transform: scaleX(-1);" src="svg/thief.svg">
+        <img style="width: 50px; margin-left: 10ch;" id="introImg" border="0">
+
+        <div class="bird-container bird-container--one">
+            <div class="bird bird--one"></div>
+        </div>
+        
+        <div class="bird-container bird-container--two">
+            <div class="bird bird--two"></div>
+        </div>
+        
+        <div class="bird-container bird-container--three">
+            <div class="bird bird--three"></div>
+        </div>
+        
+        <div class="bird-container bird-container--four">
+            <div class="bird bird--four"></div>
+        </div>
+    </div>
+</body>
+</html>

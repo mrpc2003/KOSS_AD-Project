@@ -2,14 +2,14 @@
 #include <PubSubClient.h>
 #include <SoftwareSerial.h>
 
-char ssid[] = "KMU_SW";           // your network SSID (name)
-char pass[] = "kookminsw";           // your network password
-const char* mqtt_server = "192.168.33.180"; // your MQTT broker 여기에 MQTT 브로커IP주소를 넣으세요
+char ssid[] = "windows11";           // your network SSID (name)
+char pass[] = "00000000";           // your network password
+const char* mqtt_server = "192.168.137.55"; // your MQTT broker 여기에 MQTT 브로커IP주소를 넣으세요
 const char* clientName = "pi"; // client 이름
 
 int pirSensor = D6;
 int led_pin = D7;
-int stat;
+int stat = 1;
 
 WiFiClient esp8266Client;
 PubSubClient client(esp8266Client);
