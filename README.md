@@ -1,4 +1,4 @@
-# KOSS_AD-Entrance_Detection
+# Entrance_Detection(kossAD)
 
 ### 조원
     김우현, 남궁희, 최선우 
@@ -21,9 +21,62 @@
             
 ### 주요 프로그램 설치 방법
 
-* pyqt
+
+* arduino, rasberrypi
+
+```bash
+sudo apt update # Update the list of available packages and their versions
+sudo apt full-upgrade # Install updates (new ones)
+sudo apt install fonts-unfonts-core # Install fonts-unfonts-core
+sudo apt remove ibus ibus-hangul # Remove ibus ibus-hangul
+sudo apt install fcitx fcitx-hangul # Install fcitx fcitx-hangul
+sudo reboot # Reboot the system
+sudo raspi-config # Configure the Raspberry Pi
+
+cd ~  # Go to home directory
+wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key  # Download the key
+sudo apt-key add mosquitto-repo.gpg.key # Add the key
+cd /etc/apt/source.list.d/  # Go to the directory
+sudo wget http://repo.mosquitto.org/debian/mosquitto-stretch.list # Download the list
+sudo apt-get update # Update the list of available packages and their versions
+sudo apt-cache search mosquitto # Search for mosquitto
+sudo apt-get install mosquitto mosquitto-clients # Install mosquitto mosquitto-clients
+sudo /etc/init.d/mosquitto start # Start mosquitto
+sudo systemctl enable mosquitto # Enable mosquitto
+sudo systemctl status mosquitto # Check the status of mosquitto
 ```
-$ pip install PyQt5
+* node, express
+```bash
+sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - # Install Node.js
+apt list | grep nodejs # Check the version of Node.js
+sudo apt-get install -y nodejs # Install Node.js
+sudo apt-get install gcc g++ make # Install gcc g++ make
+sudo apt install build-essential # Install build-essential
+
+sudo npm install -g pm2 # Install pm2
+
+sudo npm install -g express # Install express
+sudo npm install -g npm@8.18.0 # Install npm
+sudo npm install -g express-generator # Install express-generator
+```
+* mqtt
+```bash
+pip install paho-mqtt # Install paho-mqtt
+```
+
+* pyqt
+```bash
+sudo apt-get install python3-pyqt5 # Install python3-pyqt5
+sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools # Install qt5-default pyqt5-dev pyqt5-dev-tools
+
+sudo -H pip install --upgrade --ignore-installed pip setuptools # Install pip
+pip install --upgrade setuptools # Install setuptools
+
+sudo pip3 install PyQt5 # Install PyQt5
+sudo pip3 install PyQt5-tools # Install PyQt5-tools
+sudo apt-get install qttools5-dev-tools # Install qttools5-dev-tools
+
+sudo apt autoremove # Remove packages that are no longer needed
 ```
 
 ### 주요 기능
