@@ -1,12 +1,12 @@
 <div align="center">
 
-English | [한국어](README.ko.md)
+[English](README.md) | 한국어
 
 # 🚪 Entrance Detection
 
-### IoT Security System with Arduino · MQTT · Web · PyQt
+### Arduino · MQTT · Web · PyQt 기반 IoT 보안/방범 시스템
 
-_A compact IoT demo that simplifies modern intrusion detection — bridging backend, frontend, and embedded in one team project_
+_현대의 방범 장치를 간소화한 IoT 데모 — 백엔드, 프론트엔드, 임베디드를 잇는 팀 프로젝트_
 
 <br/>
 
@@ -27,40 +27,40 @@ _A compact IoT demo that simplifies modern intrusion detection — bridging back
 
 ---
 
-## Table of Contents
+## 목차
 
-- [About](#about)
-- [Team](#team)
-- [Architecture](#architecture)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Setup & Usage](#setup--usage)
-- [Demo Gallery](#demo-gallery)
+- [프로젝트 소개](#프로젝트-소개)
+- [팀 구성](#팀-구성)
+- [시스템 아키텍처](#시스템-아키텍처)
+- [주요 기능](#주요-기능)
+- [기술 스택](#기술-스택)
+- [프로젝트 구조](#프로젝트-구조)
+- [설치 및 실행](#설치-및-실행)
+- [데모 갤러리](#데모-갤러리)
 - [Maintainer](#maintainer)
 
 ---
 
-## About
+## 프로젝트 소개
 
-**Entrance Detection** is a small-scale IoT security demo designed for home/office intrusion monitoring.
-An Arduino with a PIR motion sensor publishes detection events through an MQTT broker; a **Node.js web server** and a **PyQt5 desktop client** connected to the same broker update their state in real time.
+**Entrance Detection** 은 가정/사무실 출입 감지를 가정한 소형 IoT 보안 데모입니다.
+PIR 모션 센서를 단 아두이노가 MQTT 브로커를 통해 이벤트를 발행하면, 같은 브로커에 연결된 **Node.js 웹 서버** 와 **PyQt5 클라이언트**가 동시에 상태를 갱신합니다.
 
-> TL;DR — A full-stack IoT practice project connecting **Hardware (Arduino) ↔ Gateway (Node.js / Mosquitto) ↔ Clients (Web / PyQt)** across three layers via MQTT and WebSocket.
+> 한 줄 요약 — **하드웨어(아두이노) ↔ 게이트웨이(Node/Mosquitto) ↔ 사용자(Web/PyQt)** 3계층을 MQTT/WebSocket으로 묶은 풀스택 IoT 실습 프로젝트.
 
 ---
 
-## Team
+## 팀 구성
 
-| Name | Role | Responsibility |
+| 이름 | 역할 | 담당 |
 |---|---|---|
-| **Choi Seonwoo** | Backend | MQTT broker, Node.js / Express web server |
-| **Namgung Hee** | Frontend | Web UI (HTML / CSS), PyQt5 client |
-| **Kim Woohyun** ([@mrpc2003](https://github.com/mrpc2003)) | Embedded | Arduino circuit design & firmware |
+| **최선우** | 백엔드 | MQTT 브로커, Node.js / Express 웹 서버 |
+| **남궁희** | 프론트엔드 | 웹 UI (HTML / CSS), PyQt5 클라이언트 |
+| **김우현** ([@mrpc2003](https://github.com/mrpc2003)) | 임베디드 | 아두이노 회로 구성 및 펌웨어 |
 
 ---
 
-## Architecture
+## 시스템 아키텍처
 
 ```mermaid
 flowchart LR
@@ -85,29 +85,29 @@ flowchart LR
     N -- "HTTP :3000" --> W
 ```
 
-Key data flow:
-- Arduino publishes detection results on the `PIR` topic
-- Node.js server receives MQTT messages and pushes them to the web via WebSocket
-- Messages published on the `security` topic from PyQt5 / Web are relayed back to the Arduino to toggle security mode
+데이터 흐름 핵심:
+- 아두이노가 `PIR` 토픽으로 감지 결과를 publish
+- Node.js 서버가 MQTT 메시지를 수신해 WebSocket으로 웹에 푸시
+- PyQt5 / Web에서 발행한 `security` 토픽 메시지가 다시 아두이노로 전달되어 보안 모드를 토글
 
 ---
 
-## Features
+## 주요 기능
 
-A per-component matrix showing how each feature operates across the four layers.
+각 기능별로 4개 컴포넌트가 어떻게 동작하는지 한눈에 정리한 매트릭스입니다.
 
-| # | Feature | Web | Node.js | PyQt | Arduino |
+| # | 기능 | Web | Node.js | PyQt | Arduino |
 |---|---|---|---|---|---|
-| 1 | **Security ON/OFF toggle** | Button → WebSocket send | Message routing | Sync state to OFF | Stop/resume detection publish |
-| 2 | **Intrusion alert** | Alarm UI update | MQTT→WS bridge | — | PIR event publish |
-| 3 | **Package arrival notification** | Display package image | PyQt→Web relay | "Package" button publish | — |
-| 4 | **Intruder detection mode** | — | — | Alert sound (MP3) | — |
-| 5 | **Disarm (correct password)** | Disarm UI | PyQt→Web relay | Send OFF signal | Stop detection publish |
-| 6 | **Disarm (wrong password)** | — | — | Alert sound (MP3) | — |
+| 1 | **보안 ON/OFF 토글** | 버튼 → WebSocket 송신 | 메시지 라우팅 | 상태 OFF로 동기화 | 감지 발행 중단/재개 |
+| 2 | **침입 감지 알림** | 경보 UI 갱신 | MQTT→WS 브리지 | — | PIR 이벤트 publish |
+| 3 | **택배 도착 알림** | 택배 이미지 표시 | PyQt→Web 전달 | "택배" 버튼 publish | — |
+| 4 | **도둑 감지 모드** | — | — | 경고음(MP3) 재생 | — |
+| 5 | **보안 해제 (비밀번호 정상)** | 보안 해제 UI | PyQt→Web 전달 | OFF 신호 송신 | 감지 발행 중단 |
+| 6 | **보안 해제 (비밀번호 오류)** | — | — | 경고음(MP3) 재생 | — |
 
 ---
 
-## Tech Stack
+## 기술 스택
 
 **Backend & Messaging**
 - Node.js / Express `^4.18`
@@ -116,72 +116,72 @@ A per-component matrix showing how each feature operates across the four layers.
 
 **Embedded**
 - Arduino (ESP8266) + `PubSubClient`, `SoftwareSerial`
-- PIR motion sensor + LED
+- PIR 모션 센서 + LED
 
 **Desktop / Vision**
 - Python 3 + PyQt5 + `paho-mqtt` + `pygame`
-- (Optional) `face_recognition` + OpenCV + Flask live-streaming module
+- (옵션) `face_recognition` + OpenCV + Flask 라이브 스트리밍 모듈
 
 **Frontend**
 - HTML5 / CSS3, Vanilla JS WebSocket Client
 
 ---
 
-## Project Structure
+## 프로젝트 구조
 
 ```text
 KOSS_AD-Project/
 ├── Entrance-Detection-webpage-main/
 │   └── project_koss/
 │       ├── main.js              # Express + WebSocket + MQTT bridge
-│       ├── template.js          # Server-side HTML templates
-│       ├── back_qt.py           # PyQt helper script
+│       ├── template.js          # 서버 사이드 HTML 템플릿
+│       ├── back_qt.py           # PyQt 보조 스크립트
 │       ├── package.json
-│       ├── KOSS_AD/             # Static pages (switch / invasion / noinvasion)
-│       └── public/              # First-page static assets
+│       ├── KOSS_AD/             # 정적 페이지 (switch / invasion / noinvasion)
+│       └── public/              # first 페이지 정적 자원
 ├── pyqt_ad/
-│   ├── WlsWlsWls.py             # PyQt5 main client
-│   └── curse.mp3                # Alert sound
+│   ├── WlsWlsWls.py             # PyQt5 메인 클라이언트
+│   └── curse.mp3                # 경고 사운드
 ├── face_recognition/
-│   ├── face_recog.py            # Face recognition core
-│   ├── camera.py                # OpenCV camera wrapper
-│   ├── live_streaming.py        # Flask video streaming
+│   ├── face_recog.py            # 얼굴 인식 코어
+│   ├── camera.py                # OpenCV 캠 래퍼
+│   ├── live_streaming.py        # Flask 영상 스트리밍
 │   ├── templates/index.html
-│   └── knowns/                  # Registered face images
+│   └── knowns/                  # 등록된 얼굴 이미지
 ├── security/
-│   └── security.ino             # Arduino (ESP8266) firmware
-└── 방범 IOT_20220820.xmind      # Planning mind-map
+│   └── security.ino             # 아두이노(ESP8266) 펌웨어
+└── 방범 IOT_20220820.xmind      # 기획 마인드맵
 ```
 
 ---
 
-## Setup & Usage
+## 설치 및 실행
 
-### Quick Start
+### 빠른 실행
 
 ```bash
-# 1) Node web server
+# 1) Node 웹 서버
 cd Entrance-Detection-webpage-main/project_koss
 npm install
 node main.js                 # http://localhost:3000  (WebSocket :3001)
 
-# 2) PyQt client
+# 2) PyQt 클라이언트
 cd ../../pyqt_ad
 read -s -p "Unlock password: " KOSS_AD_UNLOCK_PASSWORD; echo
 export KOSS_AD_UNLOCK_PASSWORD
 python WlsWlsWls.py
 
-# 3) Arduino firmware
-#    Upload security/security.ino to an ESP8266 board via Arduino IDE
+# 3) 아두이노 펌웨어
+#    Arduino IDE 에서 security/security.ino 를 ESP8266 보드로 업로드
 ```
 
-> ⚠️ The MQTT broker IP (`192.168.x.x`) in `main.js`, `security.ino`, and `WlsWlsWls.py` must be changed to match your local network. The PyQt unlock password is injected via the `KOSS_AD_UNLOCK_PASSWORD` environment variable — never hard-coded.
+> ⚠️ `main.js`, `security.ino`, `WlsWlsWls.py` 의 `192.168.x.x` MQTT 브로커 IP는 본인 환경에 맞게 수정해야 합니다. PyQt 해제 비밀번호는 코드에 저장하지 않고 `KOSS_AD_UNLOCK_PASSWORD` 환경변수로 주입합니다.
 
 <details>
-<summary><b>🐧 Raspberry Pi & Mosquitto Full Setup (expand)</b></summary>
+<summary><b>🐧 Raspberry Pi · Mosquitto 풀 셋업 (펼치기)</b></summary>
 
 ```bash
-# System update & Korean input (optional)
+# 시스템 업데이트 & 한글 입력기
 sudo apt update
 sudo apt full-upgrade
 sudo apt install fonts-unfonts-core
@@ -190,7 +190,7 @@ sudo apt install fcitx fcitx-hangul
 sudo reboot
 sudo raspi-config
 
-# Mosquitto MQTT Broker
+# Mosquitto MQTT 브로커
 cd ~
 wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
 sudo apt-key add mosquitto-repo.gpg.key
@@ -206,7 +206,7 @@ sudo systemctl status mosquitto
 </details>
 
 <details>
-<summary><b>🟢 Node.js & Express Setup (expand)</b></summary>
+<summary><b>🟢 Node.js · Express 셋업 (펼치기)</b></summary>
 
 ```bash
 sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
@@ -222,10 +222,10 @@ sudo npm install -g express-generator
 </details>
 
 <details>
-<summary><b>🐍 Python, MQTT & PyQt5 Setup (expand)</b></summary>
+<summary><b>🐍 Python · MQTT · PyQt5 셋업 (펼치기)</b></summary>
 
 ```bash
-# MQTT client
+# MQTT 클라이언트
 pip install paho-mqtt
 
 # PyQt5
@@ -241,9 +241,9 @@ sudo apt-get install qttools5-dev-tools
 
 ---
 
-## Demo Gallery
+## 데모 갤러리
 
-> Screenshots hosted on GitHub user-content.
+> 실행 화면 캡처 — 외부 호스팅(GitHub user-content)
 
 ### 🌐 Web
 
@@ -258,7 +258,7 @@ sudo apt-get install qttools5-dev-tools
 
 </div>
 
-### 🖥 PyQt Client / 🔌 Circuit
+### 🖥 PyQt 클라이언트 / 🔌 회로
 
 | PyQt5 Client | Hardware Wiring |
 |:---:|:---:|
@@ -268,8 +268,8 @@ sudo apt-get install qttools5-dev-tools
 
 ## Maintainer
 
-This repository is a team project archive hosted by **Kim Woohyun ([@mrpc2003](https://github.com/mrpc2003))**.
-He was responsible for the circuit/firmware portion; see the [Team](#team) section for backend and frontend contributions.
+이 저장소는 **김우현 ([@mrpc2003](https://github.com/mrpc2003))** 이 호스팅하는 팀 프로젝트 아카이브입니다.
+회로/펌웨어 파트를 담당했으며, 백엔드·프론트엔드 기여는 위 [팀 구성](#팀-구성)을 참고해 주세요.
 
 <div align="center">
 
