@@ -130,7 +130,7 @@ flowchart LR
 ## 프로젝트 구조
 
 ```text
-KOSS_AD-Project/
+iot-entrance-detection/
 ├── Entrance-Detection-webpage-main/
 │   └── project_koss/
 │       ├── main.js              # Express + WebSocket + MQTT bridge

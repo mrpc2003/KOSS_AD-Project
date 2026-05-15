@@ -130,7 +130,7 @@ A per-component matrix showing how each feature operates across the four layers.
 ## Project Structure
 
 ```text
-KOSS_AD-Project/
+iot-entrance-detection/
 ├── Entrance-Detection-webpage-main/
 │   └── project_koss/
 │       ├── main.js              # Express + WebSocket + MQTT bridge
