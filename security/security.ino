@@ -2,9 +2,9 @@
 #include <PubSubClient.h>
 #include <SoftwareSerial.h>
 
-char ssid[] = "windows11";           // your network SSID (name)
-char pass[] = "00000000";           // your network password
-const char* mqtt_server = "192.168.137.55"; // your MQTT broker 여기에 MQTT 브로커IP주소를 넣으세요
+char ssid[] = "YOUR_WIFI_SSID";           // your network SSID (name)
+char pass[] = "YOUR_WIFI_PASSWORD";       // your network password (실제 값은 커밋하지 않기)
+const char* mqtt_server = "YOUR_MQTT_BROKER_IP"; // your MQTT broker 여기에 MQTT 브로커IP주소를 넣으세요
 const char* clientName = "pi"; // client 이름
 
 int pirSensor = D6;

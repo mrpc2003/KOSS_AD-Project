@@ -1,0 +1,23 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+
+# Local Python environments
+.venv/
+venv/
+env/
+
+# Node dependencies and build output
+node_modules/
+dist/
+build/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Local tooling/cache
+.sisyphus/
+.pytest_cache/
+.mypy_cache/

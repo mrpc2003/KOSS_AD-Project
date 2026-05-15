@@ -1,4 +1,5 @@
 import sys
+import os
 import pygame
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QMessageBox, QLineEdit, QInputDialog, QApplication
@@ -6,6 +7,9 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 import paho.mqtt.client as mqtt
+
+
+UNLOCK_PASSWORD_ENV = "KOSS_AD_UNLOCK_PASSWORD"
 
 
 class Button(QWidget):  # Button class
@@ -163,6 +167,7 @@ class password(QWidget):  # password 클래스 선언
         self.btn.clicked.connect(self.showDialog)
 
         self.le = QLineEdit(self)  # le 에 QLineEdit 저장
+        self.le.setEchoMode(QLineEdit.Password)  # 비밀번호 숨김
         self.le.move(120, 35)  # le 의 위치 설정
 
         self.setWindowTitle('Input password')  # 창 제목 설정
@@ -172,17 +177,19 @@ class password(QWidget):  # password 클래스 선언
     def showDialog(self):  # showDialog 함수 선언
         # QInputDialog 에 'Input password' 저장, 'Enter password:' 저장
         text, ok = QInputDialog.getText(
-            self, 'Input password', 'Enter password:')
+            self, 'Input password', 'Enter password:', QLineEdit.Password)
+
+        unlock_password = os.environ.get(UNLOCK_PASSWORD_ENV)
 
         if ok:  # ok 이 True 일 때
             self.le.setText(str(text))  # le 에 str(text) 저장
 
-        if text == "koss":  # text 와 "koss" 일 때
+        if unlock_password and text == unlock_password:  # 설정된 비밀번호와 일치할 때
             # QMessageBox 에 "OK" 저장, "Correct!" 저장
             QMessageBox.about(self, "OK", "Correct!")
             self.passwordCorrect()  # passwordCorrect 함수 실행
 
-        else:  # text 와 "koss" 이 아닐 때
+        else:  # 설정된 비밀번호와 일치하지 않을 때
             # QMessageBox 에 "NO" 저장, "Incorrect!!!" 저장
             QMessageBox.warning(self, "NO", "Incorrect!!!")
             pygame.init()  # pygame 초기화
@@ -225,11 +232,11 @@ if __name__ == "__main__":  # __main__ 이라는 문자열이 있을 때
 
     # 레이아웃 인스턴스 생성
     button = Button()  # button 에 Button 저장
-    passWord = password()  # passWord 에 password 저장
+    password_page = password()  # password_page 에 password 위젯 저장
 
     # Widget 추가
     widget.addWidget(button)  # widget 에 button 추가
-    widget.addWidget(passWord)  # widget 에 passWord 추가
+    widget.addWidget(password_page)  # widget 에 password_page 추가
 
     # 프로그램 화면을 보여주는 코드
     widget.setFixedHeight(1000)  # widget 의 높이 설정
